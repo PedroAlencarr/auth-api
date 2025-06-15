@@ -119,6 +119,7 @@ Este projeto foi desenvolvido com uma arquitetura em camadas, baseada nos princ�
 
 - **S - Single Responsibility Principle (SRP):** Cada classe e módulo tem uma responsabilidade única e bem definida (ex: `UserRepository` só fala com o banco, `UserService` só lida com regras de negócio).
 - **D - Dependency Inversion Principle (DIP):** As camadas de mais alto nível (controllers) não dependem diretamente das de mais baixo nível (repositórios), mas sim de abstrações. (Ex: O `Controller` chama o `Service`, que por sua vez chama o `Repository`).
+- **Separação entre App e Servidor:** A lógica da aplicação (criação e configuração do Express em `app.ts`) é separada da inicialização do servidor (em `server.ts`). Essa prática desacopla a aplicação da camada de rede e facilita a execução de testes automatizados.
 
 A estrutura de pastas reflete essa separação:
 
@@ -258,6 +259,7 @@ This project was developed with a layered architecture, based on **SOLID** princ
 
 - **S - Single Responsibility Principle (SRP):** Each class and module has a single and well-defined responsibility (e.g., `UserRepository` only interacts with the database, `UserService` only handles business logic).
 - **D - Dependency Inversion Principle (DIP):** High-level modules (controllers) do not depend on low-level modules (repositories), but on abstractions. (e.g., `Controller` calls `Service`, which in turn calls `Repository`).
+- **App-Server Separation:** The application logic (Express app creation and configuration in `app.ts`) is decoupled from the server initialization (in `server.ts`). This practice decouples the application from the network layer and greatly facilitates automated testing.
 
 The folder structure reflects this separation:
 
