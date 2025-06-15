@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { DeleteUserService } from "../services/DeleteUserService";
 import { UpdatePasswordService } from "../services/UpdateUserPasswordService";
 import { UserService } from "../services/UserService";
 import { UserRepository } from "./../repositories/UserRepository";
@@ -73,5 +74,15 @@ export class UserController {
         error: error.message || "Internal server error",
       });
     }
+  }
+
+  public async delete(req: Request, res: Response): Promise<Response> {
+    const userId = req.user.id;
+    const deleteUserService = new DeleteUserService();
+
+    await deleteUserService.execute({
+      userId: Number(userId),
+    });
+    return res.status(204).send();
   }
 }

@@ -25,4 +25,8 @@ userRoutes.put(
   (request, response) => userController.updatePassword(request, response)
 );
 
+userRoutes.delete("/profile", ensureAuthenticated, (request, response) =>
+  userController.delete(request, response)
+);
+
 export { userRoutes };
