@@ -17,6 +17,13 @@ export class UserRepository {
     return user;
   }
 
+  public async findById(id: number): Promise<User | null> {
+    const user = await this.prisma.user.findUnique({
+      where: { id },
+    });
+    return user;
+  }
+
   public async create(userData: ICreateUserDTO): Promise<User> {
     const user = await this.prisma.user.create({
       data: userData,

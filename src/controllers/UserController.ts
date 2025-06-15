@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-
 import { UserService } from "../services/UserService";
+import { UserRepository } from "./../repositories/UserRepository";
 
 export class UserController {
   public async create(req: Request, res: Response): Promise<Response> {
@@ -29,5 +29,23 @@ export class UserController {
         error: error.message || "Internal server error",
       });
     }
+  }
+
+  public async show(req: Request, res: Response): Promise<Response> {
+    const userId = req.user.id;
+
+    const userRepository = new UserRepository();
+
+    const user = await userRepository.findById(Number(userId));
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    const userResponse = {
+      id: user.id,
+      email: user.email,
+      createdAt: user.createdAt,
+    };
+    return res.json(userResponse);
   }
 }
