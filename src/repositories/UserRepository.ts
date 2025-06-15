@@ -30,4 +30,16 @@ export class UserRepository {
     });
     return user;
   }
+
+  public async updatePassword(id: number, password: string): Promise<User> {
+    const user = await this.prisma.user.update({
+      where: {
+        id,
+      },
+      data: {
+        password,
+      },
+    });
+    return user;
+  }
 }

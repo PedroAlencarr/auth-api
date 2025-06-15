@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { UpdatePasswordService } from "../services/UpdateUserPasswordService";
 import { UserService } from "../services/UserService";
 import { UserRepository } from "./../repositories/UserRepository";
 
@@ -47,5 +48,30 @@ export class UserController {
       createdAt: user.createdAt,
     };
     return res.json(userResponse);
+  }
+
+  public async updatePassword(req: Request, res: Response): Promise<Response> {
+    try {
+      const { oldPassword, newPassword } = req.body;
+      const userId = req.user.id;
+      if (!oldPassword || !newPassword) {
+        return res
+          .status(400)
+          .json({ error: "Old password and new password are required" });
+      }
+      const updateUserPasswordService = new UpdatePasswordService();
+
+      await updateUserPasswordService.execute({
+        userId: Number(userId),
+        oldPassword,
+        newPassword,
+      });
+
+      return res.status(204).send();
+    } catch (error: any) {
+      return res.status(400).json({
+        error: error.message || "Internal server error",
+      });
+    }
   }
 }
