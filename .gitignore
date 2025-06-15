@@ -1,0 +1,22 @@
+# Node
+node_modules/
+dist/
+.env
+
+# TypeScript
+*.tsbuildinfo
+
+# Prisma
+prisma/migrations/
+prisma/dev.db
+
+# Logs
+logs/
+*.log
+
+# OS
+.DS_Store
+
+# Editor configs
+.vscode/
+.idea/
